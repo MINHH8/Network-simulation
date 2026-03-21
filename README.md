@@ -10,8 +10,8 @@ This project aims to evaluate the performance of the CSMA/CA (Carrier Sense Mult
       ```
 
    2. Create a symbolic link to the project folder:
-     ```bash
 
+      ```bash
       ln -s /home/minh/Network-simulation scratch/my-wifi
       ```
     
@@ -19,8 +19,7 @@ This project aims to evaluate the performance of the CSMA/CA (Carrier Sense Mult
    (Note: You can replace "my-wifi" with any folder name)
 
    3. Build the project:
-   ```bash
-
+      ```bash
       ./ns3 build  
       ```
 
