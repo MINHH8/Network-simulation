@@ -10,90 +10,89 @@ This project aims to evaluate the performance of the CSMA/CA (Carrier Sense Mult
       - Packet Delivery Ratio (PDR)
 
 ## 🚀 How to Run
-   1. Move to ns-3 directory:
+1. Move to ns-3 directory:
       ```bash
       cd ~/ns-allinone-3.39/ns-3.39
       ```
 
-   2. Create a symbolic link to the project folder:
+2. Create a symbolic link to the project folder:
 
       ```bash
       ln -s /home/minh/Network-simulation scratch/my-wifi
       ```
     
-
    (Note: You can replace "my-wifi" with any folder name)
 
-   3. Build the project:
+3. Build the project:
       ```bash
       ./ns3 build  
       ```
 
-   4. Run the simulation:
+4. Run the simulation:
       ```bash
       ./ns3 run "my-wifi/traffic" 
       ```
 
-   5.  Create automation script  
+5.  Create automation script
 
-      5.1 Create file
-            ```bash
-            touch run_all.sh
-            ```
+      5.1 Create file:
+      ```bash
+      touch run_all.sh
+      ``` 
 
-      5.2 Open file
-            ```bash
-            nano run_all.sh
-            ```
-            
-      5.3 Paste this script
-            ```bash
-               #!/bin/bash
+      5.2 Open file:
 
-                  FINAL_CSV="full_results.csv"
+      ```bash
+      nano run_all.sh
+      ```
 
-                  echo "numNodes,txPackets,rxPackets,delaySumSeconds,rxBytes,throughputKbps,avgDelayMs,lossRatioPercent" > $FINAL_CSV
+      5.3 Paste this script:
 
-                  NODE_LIST=($(seq 2 30))
+      ```bash
 
-                  DISTANCE=10
-                  SIM_TIME=5
+      #!/bin/bash
+      FINAL_CSV="full_results.csv"
 
-                  echo "Starting Simulation..."
+      echo "numNodes,txPackets,rxPackets,delaySumSeconds,rxBytes,throughputKbps,avgDelayMs,lossRatioPercent" > $FINAL_CSV
 
-                  for n in "${NODE_LIST[@]}"
-                  do
-                     echo "[STAGE] Running for $n nodes..."
+      NODE_LIST=($(seq 2 30))
 
-                     ./ns3 run "scratch/my-wifi/traffic --numNodes=$n --distance=$DISTANCE --simTime=$SIM_TIME"
+      DISTANCE=10
+      SIM_TIME=5
 
-                     if [ -f scratch/my-wifi/summary.csv ]; then
-                        tail -n +2 scratch/my-wifi/summary.csv >> $FINAL_CSV
-                        rm scratch/my-wifi/summary.csv
-                        echo "[SUCCESS] Data for $n nodes collected."
-                     else
-                        echo "[ERROR] summary.csv not found!"
-                     fi
+      echo "Starting Simulation..."
 
-                     echo "-----------------------------------------------"
-                     sleep 1
-                  done
+      for n in "${NODE_LIST[@]}"
+      do
+         echo "[STAGE] Running for $n nodes..."
 
-                  echo "Results saved in $FINAL_CSV"
-            ```
-      
+         ./ns3 run "scratch/my-wifi/traffic --numNodes=$n --distance=$DISTANCE --simTime=$SIM_TIME"
 
+         if [ -f scratch/my-wifi/summary.csv ]; then
+            tail -n +2 scratch/my-wifi/summary.csv >> $FINAL_CSV
+            rm scratch/my-wifi/summary.csv
+            echo "[SUCCESS] Data for $n nodes collected."
+         else
+            echo "[ERROR] summary.csv not found!"
+         fi
+
+         echo "-----------------------------------------------"
+         sleep 1
+      done
+
+      echo "Results saved in $FINAL_CSV" 
+      ```
 
    6. Run All Experiments  
 
       6.1 Make the script executable
          ```bash
-            chmod +x run_all.sh
+         chmod +x run_all.sh
          ```
          
       6.2 Execute the script
          ```bash
-            ./run_all.sh
+         ./run_all.sh
          ```
 ## ⚠️ Note
 
