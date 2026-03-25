@@ -35,15 +35,18 @@ This project aims to evaluate the performance of the CSMA/CA (Carrier Sense Mult
       ```
 
    5.  Create automation script  
-   5.1 Create file
+
+      5.1 Create file
             ```bash
             touch run_all.sh
             ```
-   5.2 Open file
+
+      5.2 Open file
             ```bash
             nano run_all.sh
             ```
-   5.3 Paste this script
+            
+      5.3 Paste this script
             ```bash
                #!/bin/bash
 
